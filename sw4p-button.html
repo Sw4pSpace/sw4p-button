@@ -1,0 +1,145 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-styles/paper-styles.html"/>
+<link rel="import" href="../paper-ripple/paper-ripple.html"/>
+<link rel="import" href="../iron-behaviors/iron-button-state.html"/>
+
+<dom-module id="sw4p-button">
+
+    <template>
+
+        <style is="custom-style" include="paper-styles">
+
+            :root {
+
+            }
+
+            :host {
+                display: inline-block;
+                position: relative;
+                box-sizing: border-box;
+                min-width: 3em;
+                margin: 0 0.29em;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                font-size: 16px;
+                letter-spacing: 0.45px;
+                padding: 10px 16px;
+                line-height: 1;
+                outline-width: 0;
+                border-radius: 3px;
+                border-width: 1px;
+                border-style: solid;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                cursor: pointer;
+                z-index: 0;
+                opacity: 1;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                border-color: black;
+                background-color: var(--paper-grey-800);
+                color: white;
+                transition: background-color 0.4s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+
+            :host([disabled]) {
+                opacity: 0.6;
+                cursor: auto;
+                pointer-events: none;
+            }
+
+            :host([block]) {
+                display: block;
+            }
+
+        </style>
+
+        <slot></slot>
+        <paper-ripple></paper-ripple>
+
+    </template>
+
+    <script>
+
+        Sw4pButtonBehaviorImpl = {
+
+            hostAttributes: {
+                role: 'button',
+                tabIndex: '0'
+            },
+
+            created: function() {
+              this._contentObserver = null;
+            },
+
+            attached: function() {
+              this._setStyleNames();
+            },
+
+            detached: function() {
+                this._contentObserver.disconnected();
+            },
+
+            _setStyleNames: function() {
+
+            },
+
+            _blurOnMouseUp: function (event) {
+                this.blur();
+            },
+
+            _observeContents: function () {
+                var mutationObserver = new MutationObserver(this._boundContentChangeHandler);
+                mutationObserver.observe(this, {
+                    attributes: false,
+                    childList: true,
+                    subtree: false
+                });
+                return mutationObserver;
+            }
+        };
+
+        class Sw4pButton extends Polymer.Element {
+            static get is() {
+                return 'sw4p-button';
+            }
+            static get listeners() {
+                return {
+                    mouseup: '_blurOnMouseUp'
+                }
+            }
+            static get behaviors() {
+                return [Polymer.IronButtonState, Polymer.IronControlState, Sw4pButtonBehaviorImpl];
+            }
+            static get properties() {
+                return {
+                    size: {
+                        type: String,
+                        observer: '_setStyleNames'
+                    },
+                    active: {
+                        type: Boolean,
+                        value: false
+                    },
+                    disabled: {
+                        type: Boolean,
+                        value: false
+                    },
+                    block: {
+                        type: Boolean,
+                        value: false
+                    }
+                }
+            }
+            constructor() {
+                super();
+            }
+        }
+        customElements.define(Sw4pButton.is, Sw4pButton);
+    </script>
+
+</dom-module>

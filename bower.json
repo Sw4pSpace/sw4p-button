@@ -1,0 +1,19 @@
+{
+  "name": "sw4p-button",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Sw4pSpace/sw4p-button",
+  "license": "GNU GPL v3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^2.0.0",
+    "iron-behaviors": "PolymerElements/iron-behaviors#^2.0.0"
+  }
+}
