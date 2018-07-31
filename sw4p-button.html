@@ -20,7 +20,7 @@
                 min-width: 3em;
                 margin: 0 0.29em;
                 font-family: 'Roboto', sans-serif;
-                font-weight: 700;
+                font-weight: 600;
                 font-size: 16px;
                 letter-spacing: 0.45px;
                 padding: 10px 16px;
@@ -56,9 +56,15 @@
                 display: block;
             }
 
+            :host span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
         </style>
 
-        <slot></slot>
+        <span><slot></slot></span>
         <paper-ripple></paper-ripple>
 
     </template>
