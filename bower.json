@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "sw4p-styles": "git://github.com/Sw4pSpace/sw4p-styles.git",
     "paper-ripple": "PolymerElements/paper-ripple#^2.0.0",
     "iron-behaviors": "PolymerElements/iron-behaviors#^2.0.0"
   }
